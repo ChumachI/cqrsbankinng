@@ -1,0 +1,55 @@
+package com.example.cqrsbanking.events;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import com.example.cqrsbanking.domain.model.ObjectConverter;
+
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Table(name = "events")
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+public abstract class AbstractEvent implements Event {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID aggregateId;
+
+    @Enumerated(EnumType.STRING)
+    private EventType type;
+
+    @CreationTimestamp
+    private LocalDateTime timestamp;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Convert(converter = ObjectConverter.class)
+    private Object playload;
+
+    public AbstractEvent(UUID aggregateId, EventType type, Object playload) {
+        this.aggregateId = aggregateId;
+        this.type = type;
+        this.playload = playload;
+    }
+
+    
+}
