@@ -1,6 +1,7 @@
 package com.example.cqrsbanking.events;
 
 import com.example.cqrsbanking.domain.aggregate.Aggregate;
+import com.example.cqrsbanking.domain.model.Transaction;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TransactionCreateEvent extends AbstractEvent {
     
-    public TransactionCreateEvent(Object playLoad) {
+    public TransactionCreateEvent(Transaction playLoad) {
         super(null, EventType.TRANSACTION_CREATE, playLoad);
     }
 
