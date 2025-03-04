@@ -5,5 +5,7 @@ import com.example.cqrsbanking.service.CommandService;
 import com.example.cqrsbanking.service.QueryService;
 
 public interface ClientService extends QueryService<Client>, CommandService<Client> {
+
+    boolean existsByUsername(Client client);
     
 }
