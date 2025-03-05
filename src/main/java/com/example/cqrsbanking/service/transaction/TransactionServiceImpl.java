@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
-    private TransactionQueryService queryService;
-    private TransactionCommandService commandService;
+    private final TransactionQueryService queryService;
+    private final TransactionCommandService commandService;
     @Override
     public Transaction getById(UUID id) {
         return queryService.getById(id);

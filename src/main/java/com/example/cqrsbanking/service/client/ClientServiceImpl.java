@@ -12,8 +12,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
 
-    private ClientQueryService queryService;
-    private ClientCommandService commandService;
+    private final ClientQueryService queryService;
+    private final ClientCommandService commandService;
+    
     @Override
     public Client getById(UUID id) {
         return queryService.getById(id);

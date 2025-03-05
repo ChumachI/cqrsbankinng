@@ -5,6 +5,8 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.example.cqrsbanking.domain.model.Card;
+import com.example.cqrsbanking.domain.model.Client;
+import com.example.cqrsbanking.service.client.ClientService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,16 +14,30 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
 
-    private CardQueryService queryService;
-    private CardCommandService commandService;
+    private final CardQueryService queryService;
+    private final CardCommandService commandService;
+    private final ClientService clientService;
     @Override
     public Card getById(UUID id) {
         return queryService.getById(id);
+    }
+
+
+    @Override
+    public void createByClientId(UUID id) {
+        Client client = clientService.getById(id);
+        Card card = new Card(client.getAccount());
+        commandService.create(card);
     }
 
     @Override
     public void create(Card object) {
         commandService.create(object);
     }
-    
+
+
+    @Override
+    public boolean existsByNumberAndDate(String number, String date) {
+        return queryService.existsByNumberAndDate(number, date);
+    }
 }

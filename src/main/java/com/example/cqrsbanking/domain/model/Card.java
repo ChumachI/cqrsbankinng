@@ -25,6 +25,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Card {
 
+    public Card(Account account) {
+        this.account=account;
+    }
+
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.VARCHAR)

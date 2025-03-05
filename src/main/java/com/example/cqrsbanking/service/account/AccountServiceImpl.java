@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    private AccountQueryService queryService;
-    private AccountCommandService commandService;
+    private final AccountQueryService queryService;
+    private final AccountCommandService commandService;
     @Override
     public Account getById(UUID id) {
         return queryService.getById(id);
