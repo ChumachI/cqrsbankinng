@@ -25,9 +25,14 @@ public class ClientServiceImpl implements ClientService {
         commandService.create(object);
     }
 
-    @Override
+    @Override 
     public boolean existsByUsername(Client client) {
         return queryService.existsByUsername(client);
+    }
+
+    @Override
+    public Client getByUsername(String username) {
+        return queryService.getByUsername(username);
     }
     
 }

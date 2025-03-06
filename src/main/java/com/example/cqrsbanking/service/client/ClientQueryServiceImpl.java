@@ -25,5 +25,10 @@ public class ClientQueryServiceImpl implements ClientQueryService {
     public boolean existsByUsername(Client client) {
         return repository.existsByUsername(client.getUsername());
     }
+
+    @Override
+    public Client getByUsername(String username) {
+        return repository.getByUsername(username).orElseThrow(ResourceNotFoundException::new);
+    }
     
 }
