@@ -2,6 +2,7 @@ package com.example.cqrsbanking.web.controller;
 
 import java.util.UUID;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class TransactionController {
     private final TransactionMapper transactionMapper;
 
     @PostMapping
+    @PreAuthorize("@ssi.canAccessCard(#dto.from)")
     public void createTransaction(
         @RequestBody @Validated(OnCreate.class) final TransactionDto dto
         ) {
@@ -41,6 +43,7 @@ public class TransactionController {
     }
     
     @GetMapping("/{id}")
+    @PreAuthorize("@ssi.canAccessTransaction(#id)")
     public TransactionDto getById(@PathVariable final UUID id) {
         Transaction transaction = transactionService.getById(id);
         return transactionMapper.toDto(transaction);
