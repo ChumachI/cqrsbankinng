@@ -1,0 +1,16 @@
+package com.example.common.repository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.common.domain.model.Card;
+
+public interface CardRepository extends JpaRepository<Card, UUID>{
+
+    boolean existsByNumberAndDate(String number, String date);
+
+    Optional<Card> findByNumberAndDateAndCvv(String number, String date, String cvv);
+    
+}
