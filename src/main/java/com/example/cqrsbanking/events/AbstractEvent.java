@@ -43,12 +43,12 @@ public abstract class AbstractEvent implements Event {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Convert(converter = ObjectConverter.class)
-    private Object playload;
+    private Object payload;
 
-    public AbstractEvent(UUID aggregateId, EventType type, Object playload) {
+    public AbstractEvent(UUID aggregateId, EventType type, Object payload) {
         this.aggregateId = aggregateId;
         this.type = type;
-        this.playload = playload;
+        this.payload = payload;
     }
 
     
