@@ -12,7 +12,7 @@
       "database.dbname": "banking",
       "database.server.id": "184054",
       "table.include.list": "public.events",
-      "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
+      "schema.history.internal.kafka.bootstrap.servers": "localhost:9092",
       "transforms": "unwrap,route",
       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
       "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",

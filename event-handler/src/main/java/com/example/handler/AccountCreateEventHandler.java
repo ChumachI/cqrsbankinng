@@ -12,7 +12,7 @@ import com.google.gson.JsonObject;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-@Component("COMPONENT_CREATE")
+@Component("ACCOUNT_CREATE")
 @RequiredArgsConstructor
 public class AccountCreateEventHandler implements EventHandler {
 

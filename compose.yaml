@@ -19,7 +19,7 @@ services:
     image: 'postgres:15.1-alpine'
     ports:
       - "5437:5432"
-    env_file: 
+    env_file:
       - .env
     command:
       - "postgres"
@@ -29,6 +29,7 @@ services:
       - banking
     volumes:
       - db-data:/var/lib/postgresql/data
+
   zookeeper:
     image: 'confluentinc/cp-zookeeper:latest'
     ports:
@@ -40,6 +41,7 @@ services:
       - banking
     volumes:
       - zookeeper-data:/var/lib/zookeeper/data
+
   kafka:
     image: 'confluentinc/cp-kafka:latest'
     ports:
@@ -52,11 +54,12 @@ services:
       - KAFKA_ADVERTISED_LISTENERS=${KAFKA_ADVERTISED_LISTENERS}
       - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP}
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=${KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR}
+      - KAFKA_INTER_BROKER_LISTENER_NAME=LOCAL
     networks:
       - banking
     volumes:
       - kafka-data:/var/lib/kafka/data
-    
+
   debezium:
     image: debezium/connect:2.4.0.Final
     depends_on:
@@ -77,4 +80,3 @@ services:
     volumes:
       - debezium-data:/debezium/data
       - ./conf/:/on-startup/
-
