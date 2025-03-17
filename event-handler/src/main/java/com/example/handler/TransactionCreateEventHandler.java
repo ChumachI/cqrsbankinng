@@ -9,7 +9,6 @@ import com.example.service.transaction.TransactionService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Component("TRANSACTION_CREATE")
@@ -19,10 +18,18 @@ public class TransactionCreateEventHandler implements EventHandler {
     private final Gson gson;
 
     @Override
-    @Transactional
-    public void handle(JsonObject object, Acknowledgment acknowledgment) {
-        TransactionCreateEvent event = gson.fromJson(object, TransactionCreateEvent.class);
-        Transaction transaction = gson.fromJson((String) event.getPayload(), Transaction.class);
+    public void handle(
+            final JsonObject object,
+            final Acknowledgment acknowledgment
+    ) {
+        TransactionCreateEvent event = gson.fromJson(
+                object,
+                TransactionCreateEvent.class
+        );
+        Transaction transaction = gson.fromJson(
+                (String) event.getPayload(),
+                Transaction.class
+        );
         transactionService.create(transaction);
         acknowledgment.acknowledge();
     }

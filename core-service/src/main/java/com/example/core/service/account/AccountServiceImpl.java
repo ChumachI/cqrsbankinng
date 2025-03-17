@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.example.common.domain.model.Account;
+import com.example.common.service.account.AccountQueryService;
 
 import lombok.RequiredArgsConstructor;
 

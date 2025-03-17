@@ -1,4 +1,4 @@
-package com.example.core.service.transaction;
+package com.example.common.service.transaction;
 
 import java.util.UUID;
 

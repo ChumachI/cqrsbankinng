@@ -1,6 +1,7 @@
 package com.example.common.domain.model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
@@ -25,10 +26,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Card {
 
-    public Card(Account account) {
-        this.account=account;
-    }
-
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -48,5 +45,27 @@ public class Card {
     @ManyToOne
     private Account account;
 
+    public Card( final Account account) {
+        this.account = account;
+    }
 
+        @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Card card = (Card) o;
+        return id.equals(card.id)
+                && Objects.equals(number, card.number)
+                && Objects.equals(date, card.date)
+                && Objects.equals(cvv, card.cvv);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, number, date, cvv);
+    }
 }

@@ -41,8 +41,10 @@ public class AuthServiceImpl implements AuthService {
     }
     
     @Override
-    public void register(Client client) {
-        if(clientService.existsByUsername(client)) {
+    public void register(
+            final Client client
+    ) {
+        if (clientService.existsByUsername(client.getUsername())) {
             throw new ResourceAlreadyExistsException();
         }
         client.setPassword(passwordEncoder.encode(client.getPassword()));

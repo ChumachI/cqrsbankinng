@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.common.domain.model.Card;
 import com.example.common.domain.model.Client;
+import com.example.common.service.card.CardQueryService;
 import com.example.core.service.client.ClientService;
 
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,11 @@ public class CardServiceImpl implements CardService {
     @Override
     public Card getByNumberAndDateAndCvv(String number, String date, String cvv) {
         return queryService.getByNumberAndDateAndCvv(number, date, cvv);
+    }
+
+
+    @Override
+    public Card getByNumberAndDate(String number, String date) {
+        return queryService.getByNumberAndDate(number, date);
     }
 }

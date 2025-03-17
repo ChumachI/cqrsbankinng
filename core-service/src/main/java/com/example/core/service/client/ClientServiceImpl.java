@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.example.common.domain.model.Client;
+import com.example.common.service.client.ClientQueryService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,27 +13,36 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
 
+
     private final ClientQueryService queryService;
     private final ClientCommandService commandService;
-    
+
     @Override
-    public Client getById(UUID id) {
+    public void create(
+            final Client object
+    ) {
+        commandService.create(object);
+    }
+
+    @Override
+    public Client getById(
+            final UUID id
+    ) {
         return queryService.getById(id);
     }
 
     @Override
-    public void create(Client object) {
-        commandService.create(object);
-    }
-
-    @Override 
-    public boolean existsByUsername(Client client) {
-        return queryService.existsByUsername(client);
+    public Client getByUsername(
+            final String username
+    ) {
+        return queryService.getByUsername(username);
     }
 
     @Override
-    public Client getByUsername(String username) {
-        return queryService.getByUsername(username);
+    public boolean existsByUsername(
+            final String username
+    ) {
+        return queryService.existsByUsername(username);
     }
     
 }

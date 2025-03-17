@@ -1,4 +1,4 @@
-package com.example.core.service.card;
+package com.example.common.service.card;
 
 import java.util.UUID;
 
@@ -29,6 +29,12 @@ public class CardQueryServiceImpl implements CardQueryService {
     @Override
     public Card getByNumberAndDateAndCvv(String number, String date, String cvv) {
         return repository.findByNumberAndDateAndCvv(number, date, cvv).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Override
+    public Card getByNumberAndDate(String number, String date) {
+        return repository.findByNumberAndDate(number, date)
+                .orElseThrow(ResourceNotFoundException::new);
     }
     
 }

@@ -18,17 +18,29 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DebeziumEventConsumer implements CDCEventConsumer {
     
-    private final Map<String, EventHandler> handlers;
+    private final Map<String, EventHandler> factories;
+
     @Override
     @KafkaListener(topics = "events")
-    public void process(String payload, Acknowledgment acknowledgment) {
-        try{
-            log.info("Recieved message: {}", payload);
-            JsonObject json = JsonParser.parseString(payload).getAsJsonObject().get(payload).getAsJsonObject();
-            String type = json.get("type").getAsString();
-            handlers.get(type).handle(json, acknowledgment);
+    public void process(
+            final String payload,
+            final Acknowledgment acknowledgment
+    ) {
+        try {
+            log.info("Received message: {}", payload);
+            JsonObject json = JsonParser.parseString(payload)
+                    .getAsJsonObject()
+                    .get("payload")
+                    .getAsJsonObject();
+            String type = json.get("type")
+                    .getAsString();
+            factories.get(type)
+                    .handle(
+                            json,
+                            acknowledgment
+                    );
         } catch (Exception e) {
-            log.error(e.getMessage());
+            e.printStackTrace();
         }
     }
     

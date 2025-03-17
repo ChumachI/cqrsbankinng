@@ -1,13 +1,16 @@
-package com.example.core.service.client;
+package com.example.common.service.client;
+
+import java.util.UUID;
 
 import com.example.common.domain.model.Client;
 import com.example.common.service.QueryService;
-import com.example.core.service.CommandService;
 
-public interface ClientService extends QueryService<Client>, CommandService<Client> {
+public interface ClientQueryService extends QueryService<Client> {
 
     Client getByUsername(String username);
 
     boolean existsByUsername(String username);
+
+    Client getByAccount(UUID accountId);
     
 }

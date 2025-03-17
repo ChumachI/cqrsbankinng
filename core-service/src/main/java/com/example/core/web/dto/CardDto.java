@@ -2,6 +2,9 @@ package com.example.core.web.dto;
 
 import java.util.UUID;
 
+import com.example.core.web.dto.mapper.OnTransactionFrom;
+import com.example.core.web.dto.mapper.OnTransactionTo;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
@@ -22,30 +25,29 @@ public class CardDto {
     )
     private UUID id;
 
-    @NotBlank(
-        message = "Card number must be not empty.",
-        groups = OnCreate.class
-    )
     @Null(
-        message = "Card number must be null."
+        message = "Card number must be null.",
+        groups = {
+            OnCreate.class,
+            OnTransactionFrom.class,
+            OnTransactionTo.class
+        }
     )
     private String number;
 
     @NotBlank(
         message = "Card date must be not empty.",
-        groups = OnCreate.class
-    )
-    @Null(
-        message = "Card date must be null."
+        groups = {OnCreate.class, OnTransactionFrom.class}
     )
     private String date;
 
     @NotBlank(
         message = "Card cvv must be not empty.",
-        groups = OnCreate.class
+        groups = {OnCreate.class, OnTransactionFrom.class}
     )
     @Null(
-        message = "Card cvv must be null."
+        message = "Card cvv must be null.",
+        groups = OnTransactionTo.class
     )
     private String cvv;
 }

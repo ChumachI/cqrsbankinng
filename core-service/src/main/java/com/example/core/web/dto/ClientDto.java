@@ -27,30 +27,36 @@ public class ClientDto {
     private UUID id;
 
     @NotNull(
-        message = "Name must be not null."
+        message = "Name must be not null.",
+        groups = {OnCreate.class, OnUpdate.class}
     )
     @Length(
         min = 1, 
         max = 255, 
-        message = "Name length must be in {min} and {max}."
+        message = "Name length must be in {min} and {max}.",
+        groups = {OnCreate.class, OnUpdate.class}
     )
     private String name;
 
     @Email(
-        message = "Username must be a valid email."
+        message = "Username must be a valid email.",
+        groups = {OnCreate.class, OnUpdate.class}
     )
     @NotNull(
-        message = "Username must be not null."
+        message = "Username must be not null.",
+        groups = {OnCreate.class, OnUpdate.class}
     )
     @Length(
         min = 1, 
         max = 255, 
-        message = "Username length must be in {min} and {max}."
+        message = "Username length must be in {min} and {max}.",
+        groups = {OnCreate.class, OnUpdate.class}
     )
     private String username;
 
     @NotNull(
-        message = "Password must not be null."
+        message = "Password must not be null.",
+        groups = {OnCreate.class, OnUpdate.class}
     )
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;

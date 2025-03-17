@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.example.common.domain.model.Transaction;
+import com.example.common.service.transaction.TransactionQueryService;
 
 import lombok.RequiredArgsConstructor;
 
